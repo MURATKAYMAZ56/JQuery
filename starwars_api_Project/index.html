@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Starwars Charecters Generator</title>
+  <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <h1>Your Starwars Character</h1>
+    <button id="button">Generate A Starwars Charecter</button>
+    <img id="charecter_img" src="" alt="starwars_character" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $.get(
+          "https://akabab.github.io/starwars-api/api/id/1.json",
+          function (data) {
+            console.log(data);
+          }
+        );
+        
+        $("#button").on("click", function () {
+        const starWarsUrl = "https://akabab.github.io/starwars-api/api/id/";
+        const numberGenerator = Math.ceil(Math.random() * 88);
+        const fullpath= starWarsUrl+numberGenerator+".json"; 
+          $.get(fullpath, function (data) {
+              $("h1").text(data["name"]);
+              $("#charecter_img").attr("src", data['image']);
+            console.log(data);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
